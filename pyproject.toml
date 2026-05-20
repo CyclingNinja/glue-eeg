@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend ="setuptools.build_meta"
+
+[project]
+name = "glue-eeg"
+version = "0.1.0"
+description = "Glue plugin for EEG recordings in EDF (European Data Format)"
+requires-python = ">=3.11"
+dependencies = [
+    "glue-core>=1.21",
+    "glue-qt>=0.4",
+    "pyedflib>=0.1.22",
+    "numpy>=1.25",
+    "qtpy>=2.4",
+    "PyQt5>=5.15"
+]
+
+[project.entry-points."glue.plugins"]
+eeg = "glue_eeg:setup"
+
+[tool.setuptools.packages.find]
+where = ["."]
