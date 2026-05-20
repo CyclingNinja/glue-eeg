@@ -143,6 +143,9 @@ class EDFViewer(MatplotlibDataViewer):
         self.state._ref_data_helper.remove_data(data)
         super().remove_data(data)
 
+    def apply_roi(self, roi, override_mode=None):
+        pass
+
     # ------------------------------------------------------------------
     # Public API for external services
     # ------------------------------------------------------------------

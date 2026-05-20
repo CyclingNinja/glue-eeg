@@ -1,4 +1,10 @@
 uv.lock
 .idea
 *.egg-info
+*.cython
+*.pyc
+__pycache__/
+*.pyc
+
+
 
