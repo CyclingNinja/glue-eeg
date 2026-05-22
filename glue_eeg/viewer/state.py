@@ -15,7 +15,7 @@ class EDFViewerState(MatplotlibDataViewerState):
 
     reference_data = DDSCProperty(docstring='EDF dataset being displayed')
     window_duration = DDCProperty(30.0, docstring='Visible time window in seconds')
-    channel_spacing = DDCProperty(1.0, docstring='Vertical spacing between channels (normalised units)')
+    channel_spacing = DDCProperty(5.0, docstring='Vertical spacing between channels (normalised units)')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
