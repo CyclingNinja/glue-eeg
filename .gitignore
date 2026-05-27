@@ -1,10 +1,47 @@
-uv.lock
-.idea
+# Sphinx & coverage
+build
+doc/_build
+doc/api
+glue/tests/htmlcov
+*.coverage
+*htmlcov*
+
+# Packages/installer info
+doc/.eggs
 *.egg-info
-*.cython
+dist
+
+# Compiled files
 *.pyc
-__pycache__/
-*.pyc
 
+# Other generated files
+glue/_githash.py
 
+# Other
+.pylintrc
+*.ropeproject
+*.__junk*
+*.orig
+*~
+.cache
 
+# Mac OSX
+.DS_Store
+
+# PyCharm
+.idea
+
+# Eclipse editor project files
+.project
+.pydevproject
+.settings
+
+.eggs
+.hypothesis
+.pytest_cache
+.tox
+.vscode
+# vscode plugin
+.history
+
+results
