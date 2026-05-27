@@ -35,6 +35,7 @@ class EDFViewer(MatplotlibDataViewer):
 
     def __init__(self, session, parent=None, state=None):
         super().__init__(session, parent=parent, state=state)
+        self._last_roi_range = None
         self._setup_layout()
         self._setup_axes_style()
         self._connect_state()
@@ -144,7 +145,19 @@ class EDFViewer(MatplotlibDataViewer):
         super().remove_data(data)
 
     def apply_roi(self, roi, override_mode=None):
-        pass
+        if not self.layers:
+            return
+        data = self.state.reference_data
+        if data is None:
+            return
+        try:
+            time_cid = data.id['time']
+        except Exception:
+            return
+        from glue.core.subset import RangeSubsetState
+        subset_state = RangeSubsetState(roi.lo, roi.hi, time_cid)
+        self.session.edit_subset_mode.update(self._data, subset_state, focus_data=data)
+        self._last_roi_range = (roi.lo, roi.hi)
 
     # ------------------------------------------------------------------
     # Public API for external services

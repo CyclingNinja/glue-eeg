@@ -82,6 +82,11 @@ class ROIPanel(QtWidgets.QWidget):
     def _build_button_row(self) -> QtWidgets.QHBoxLayout:
         row = QtWidgets.QHBoxLayout()
 
+        self._btn_add = QtWidgets.QPushButton('Add ROI')
+        self._btn_add.setToolTip('Add current x-range selection as a region of interest')
+        self._btn_add.clicked.connect(self._on_add_roi)
+        row.addWidget(self._btn_add)
+
         self._btn_goto = QtWidgets.QPushButton('Go To')
         self._btn_goto.setToolTip('Navigate to selected region')
         self._btn_goto.clicked.connect(self._on_goto)
@@ -184,6 +189,21 @@ class ROIPanel(QtWidgets.QWidget):
     # ------------------------------------------------------------------
     # Slots
     # ------------------------------------------------------------------
+
+    def _on_add_roi(self) -> None:
+        viewer = self._viewer()
+        if viewer is None:
+            return
+        roi_range = getattr(viewer, '_last_roi_range', None)
+        if roi_range is None:
+            return
+        t_start, t_end = roi_range
+        default_label = f'ROI {self._list.count() + 1}'
+        label, ok = QtWidgets.QInputDialog.getText(
+            self, 'Add Region of Interest', 'Label:', text=default_label
+        )
+        if ok and label.strip():
+            self.add_roi(t_start, t_end, label.strip())
 
     def _on_item_double_clicked(self, item: ROIItem) -> None:
         self.navigate_to(item)
